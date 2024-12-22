@@ -26,6 +26,12 @@ importers:
       astro:
         specifier: ^5.0.5
         version: 5.0.5(jiti@1.21.6)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1)
+      dayjs:
+        specifier: ^1.11.13
+        version: 1.11.13
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       react:
         specifier: ^19.0.0
         version: 19.0.0
@@ -39,6 +45,9 @@ importers:
       '@flydotio/dockerfile':
         specifier: ^0.5.9
         version: 0.5.9
+      '@types/lodash':
+        specifier: ^4.17.13
+        version: 4.17.13
       daisyui:
         specifier: ^4.12.22
         version: 4.12.22(postcss@8.4.49)
@@ -758,6 +767,9 @@ packages:
   '@types/hast@3.0.4':
     resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
 
+  '@types/lodash@4.17.13':
+    resolution: {integrity: sha512-lfx+dftrEZcdBPczf9d0Qv0x+j/rfNCMuC6OcfXmO8gkfeNAY88PgKUbvG56whcN23gc27yenwF6oJZXGFpYxg==}
+
   '@types/mdast@4.0.4':
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
 
@@ -1013,6 +1025,9 @@ packages:
   daisyui@4.12.22:
     resolution: {integrity: sha512-HDLWbmTnXxhE1MrMgSWjVgdRt+bVYHvfNbW3GTsyIokRSqTHonUTrxV3RhpPDjGIWaHt+ELtDCTYCtUFgL2/Nw==}
     engines: {node: '>=16.9.0'}
+
+  dayjs@1.11.13:
+    resolution: {integrity: sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==}
 
   debug@4.4.0:
     resolution: {integrity: sha512-6WTZ/IxCY/T6BALoZHaE4ctp9xm+Z5kY/pzYaCHRFeyVhojxlrm+46y68HA6hr0TcwEssoxNiDEUJQjfPZ/RYA==}
@@ -1405,6 +1420,9 @@ packages:
   locate-path@5.0.0:
     resolution: {integrity: sha512-t7hw9pI+WvuwNJXwk5zVHpyhIqzg2qTlklJOf0mVxGSbe3Fp2VieZcduNYjaLDoy6p9uGpQEGWG87WpMKlNq8g==}
     engines: {node: '>=8'}
+
+  lodash@4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
 
   longest-streak@3.1.0:
     resolution: {integrity: sha512-9Ri+o0JYgehTaVBBDoMqIl8GXtbWg711O3srftcHhZ0dqnETqLaoIK0x17fUw9rFSlK/0NlsKe0Ahhyl5pXE2g==}
@@ -2882,6 +2900,8 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.3
 
+  '@types/lodash@4.17.13': {}
+
   '@types/mdast@4.0.4':
     dependencies:
       '@types/unist': 3.0.3
@@ -3195,6 +3215,8 @@ snapshots:
       postcss-js: 4.0.1(postcss@8.4.49)
     transitivePeerDependencies:
       - postcss
+
+  dayjs@1.11.13: {}
 
   debug@4.4.0:
     dependencies:
@@ -3676,6 +3698,8 @@ snapshots:
   locate-path@5.0.0:
     dependencies:
       p-locate: 4.1.0
+
+  lodash@4.17.21: {}
 
   longest-streak@3.1.0: {}
 

@@ -4,6 +4,12 @@ dist/
 # generated types
 .astro/
 
+# content blog dir
+src/content/blogs/*.md
+src/content/blogs/*.mdx
+
+src/content/blogs/images/
+
 # dependencies
 node_modules/
 

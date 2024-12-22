@@ -1,0 +1,31 @@
+---
+import HeroImage from "@assets/home-page-hero.png";
+
+import Layout from "@layouts/Layout.astro";
+---
+
+<Layout title="Oops! - Not Found">
+  <div
+    class="hero min-h-full items-start"
+    style={`background-image: url('${HeroImage.src}');`}
+  >
+    <div class="hero-content">
+      <div class="card">
+        <div class="card-body items-center">
+          <div class="chat chat-start w-full">
+            <div class="chat-bubble md:text-3xl text-2xl">
+              <p class="mb-5">Ugh oh... 404</p>
+              <p class="mb-5">
+                It looks like you've taken a wrong turn somewhere.
+              </p>
+              <a href="/" class="btn btn-outlined md:btn-lg w-full">
+                Try heading home
+              </a>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

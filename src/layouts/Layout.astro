@@ -7,6 +7,7 @@ import GithubLogo from "@components/ui/icons/github-line.svg";
 
 const { title } = Astro.props;
 
+const navBarTitle = "Hello 💩";
 const navItems = [
   { label: "Home", path: "/", emoji: "🏡" },
   { label: "About", path: "/about", emoji: "👨‍💻" },
@@ -46,7 +47,7 @@ const navItems = [
             </label>
           </div>
           <div class="flex-1 text-lg font-medium mx-2 px-2">
-            <a href="/">Hello 💩</a>
+            <a href="/">{navBarTitle}</a>
           </div>
           <div class="hidden flex-none lg:block">
             <ul class="menu menu-lg menu-horizontal">
@@ -119,8 +120,10 @@ const navItems = [
           aria-label="close sidebar"
           class="drawer-overlay"></label>
 
-        <div class="bg-base-200 min-h-full w-80 p-2">
-          <div class="flex items-center">
+        <div class="bg-base-200 min-h-full w-80">
+          <div
+            class="flex items-center p-2 bg-base-300 border-neutral border-b"
+          >
             <label
               for="app-drawer"
               aria-label="close sidebar"
@@ -128,10 +131,12 @@ const navItems = [
             >
               <CloseLargeLine size={24} />
             </label>
-            <span class="flex-1 text-lg font-medium mx-2 px-2">Hello 💩</span>
+            <span class="flex-1 text-lg font-medium mx-2 px-2"
+              >{navBarTitle}</span
+            >
           </div>
 
-          <ul class="menu menu-lg p-0">
+          <ul class="menu menu-lg p-2">
             <!-- Sidebar content here -->
             {
               navItems.map((item) => (

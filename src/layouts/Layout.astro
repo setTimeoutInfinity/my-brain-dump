@@ -13,7 +13,7 @@ const navItems = [
 ---
 
 <!doctype html>
-<html class="m-0" lang="en" data-theme="dark">
+<html class="m-0" lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -25,14 +25,14 @@ const navItems = [
       media="all"
     />
     <meta name="generator" content={Astro.generator} />
-    <title>{`${title || "Bull 💩"} - Danyal Lakzian`}</title>
+    <title>{`${title || "Brain Dump 💩"} - Danyal`}</title>
   </head>
   <body class="h-screen w-full">
     <div class="drawer h-full">
       <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
       <div class="drawer-content flex flex-col">
         <!-- Navbar -->
-        <div class="navbar bg-base-300 w-full sticky top-0">
+        <div class="navbar bg-base-300 w-full sticky top-0 z-10">
           <div class="flex-none lg:hidden">
             <label
               for="my-drawer-3"
@@ -43,7 +43,7 @@ const navItems = [
             </label>
           </div>
           <div class="mx-2 flex-1 px-2">
-            <a href="/">Bull 💩</a>
+            <a href="/">Hello 💩</a>
           </div>
           <div class="hidden flex-none lg:block">
             <ul class="menu menu-horizontal">

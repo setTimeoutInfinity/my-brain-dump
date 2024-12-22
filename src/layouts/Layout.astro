@@ -8,8 +8,8 @@ import GithubLogo from "@components/ui/icons/github-line.svg";
 const { title } = Astro.props;
 
 const navItems = [
-  { label: "Home", path: "/" },
-  { label: "About", path: "/about" },
+  { label: "Home", path: "/", emoji: "🏡" },
+  { label: "About", path: "/about", emoji: "👨‍💻" },
 ];
 ---
 
@@ -49,12 +49,15 @@ const navItems = [
             <a href="/">Hello 💩</a>
           </div>
           <div class="hidden flex-none lg:block">
-            <ul class="menu menu-horizontal">
+            <ul class="menu menu-lg menu-horizontal">
               <!-- Navbar menu content here -->
               {
                 navItems.reverse().map((item) => (
                   <li>
-                    <a href={item.path}>{item.label}</a>
+                    <a href={item.path}>
+                      <span>{item.emoji}</span>
+                      {item.label}
+                    </a>
                   </li>
                 ))
               }
@@ -133,7 +136,10 @@ const navItems = [
             {
               navItems.map((item) => (
                 <li>
-                  <a href={item.path}>{item.label}</a>
+                  <a href={item.path}>
+                    <span>{item.emoji}</span>
+                    {item.label}
+                  </a>
                 </li>
               ))
             }

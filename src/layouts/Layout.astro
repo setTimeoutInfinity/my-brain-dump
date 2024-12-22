@@ -1,5 +1,6 @@
 ---
 import MenuLine from "@components/ui/icons/menu-line.svg";
+import CloseLargeLine from "@components/ui/icons/close-large-line.svg";
 import InstagramLogo from "@components/ui/icons/instagram-line.svg";
 import LinkedInLogo from "@components/ui/icons/linkedin-line.svg";
 import GithubLogo from "@components/ui/icons/github-line.svg";
@@ -44,7 +45,7 @@ const navItems = [
               <MenuLine size={24} />
             </label>
           </div>
-          <div class="mx-2 flex-1 px-2">
+          <div class="flex-1 text-lg font-medium mx-2 px-2">
             <a href="/">Hello 💩</a>
           </div>
           <div class="hidden flex-none lg:block">
@@ -114,16 +115,30 @@ const navItems = [
           for="app-drawer"
           aria-label="close sidebar"
           class="drawer-overlay"></label>
-        <ul class="menu bg-base-200 min-h-full w-80 p-4">
-          <!-- Sidebar content here -->
-          {
-            navItems.map((item) => (
-              <li>
-                <a href={item.path}>{item.label}</a>
-              </li>
-            ))
-          }
-        </ul>
+
+        <div class="bg-base-200 min-h-full w-80 p-2">
+          <div class="flex items-center">
+            <label
+              for="app-drawer"
+              aria-label="close sidebar"
+              class="btn btn-square btn-ghost"
+            >
+              <CloseLargeLine size={24} />
+            </label>
+            <span class="flex-1 text-lg font-medium mx-2 px-2">Hello 💩</span>
+          </div>
+
+          <ul class="menu menu-lg p-0">
+            <!-- Sidebar content here -->
+            {
+              navItems.map((item) => (
+                <li>
+                  <a href={item.path}>{item.label}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
       </div>
     </div>
   </body>

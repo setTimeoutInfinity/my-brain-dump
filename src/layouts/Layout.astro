@@ -27,7 +27,7 @@ const navItems = [
       media="all"
     />
     <meta name="generator" content={Astro.generator} />
-    <title>{`${title || "Brain Dump 💩"} - Danyal`}</title>
+    <title>{`${title ? `${title} - ` : "" || ""}My Brain Dump 💩`}</title>
   </head>
   <body class="h-screen w-full">
     <div class="drawer h-full">

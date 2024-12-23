@@ -1,15 +1,8 @@
 ---
-import MenuLine from "@components/ui/icons/menu-line.svg";
-import CloseLargeLine from "@components/ui/icons/close-large-line.svg";
 import Footer from "@components/ui/Footer.astro";
+import Navbar from "@components/ui/Navbar.astro";
 
 const { title } = Astro.props;
-
-const navBarTitle = "Hello 💩";
-const navItems = [
-  { label: "Home", path: "/", emoji: "🏡" },
-  { label: "About", path: "/about", emoji: "👨‍💻" },
-];
 ---
 
 <!doctype html>
@@ -28,85 +21,12 @@ const navItems = [
     <title>{`${title ? `${title} - ` : "" || ""}My Brain Dump 💩`}</title>
   </head>
   <body class="h-screen w-full">
-    <div class="drawer h-full">
-      <input id="app-drawer" type="checkbox" class="drawer-toggle" />
-      <div class="drawer-content flex flex-col">
-        <!-- Navbar -->
-        <div
-          class="navbar bg-base-300 w-full sticky top-0 z-10 border-neutral border-b"
-        >
-          <div class="flex-none lg:hidden">
-            <label
-              for="app-drawer"
-              aria-label="open sidebar"
-              class="btn btn-square btn-ghost"
-            >
-              <MenuLine size={24} />
-            </label>
-          </div>
-          <div class="flex-1 text-lg font-medium mx-2 px-2">
-            <a href="/">{navBarTitle}</a>
-          </div>
-          <div class="hidden flex-none lg:block">
-            <ul class="menu menu-lg menu-horizontal">
-              <!-- Navbar menu content here -->
-              {
-                navItems.reverse().map((item) => (
-                  <li>
-                    <a href={item.path}>
-                      <span>{item.emoji}</span>
-                      {item.label}
-                    </a>
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-        </div>
-        <!-- Page content here -->
-        <main class="h-full">
-          <slot />
-        </main>
+    <Navbar>
+      <main class="h-full">
+        <slot />
+      </main>
 
-        <Footer />
-      </div>
-      <div class="drawer-side z-20">
-        <label
-          for="app-drawer"
-          aria-label="close sidebar"
-          class="drawer-overlay"></label>
-
-        <div class="bg-base-200 min-h-full w-80">
-          <div
-            class="flex items-center p-2 bg-base-300 border-neutral border-b"
-          >
-            <label
-              for="app-drawer"
-              aria-label="close sidebar"
-              class="btn btn-square btn-ghost"
-            >
-              <CloseLargeLine size={24} />
-            </label>
-            <span class="flex-1 text-lg font-medium mx-2 px-2"
-              >{navBarTitle}</span
-            >
-          </div>
-
-          <ul class="menu menu-lg p-2">
-            <!-- Sidebar content here -->
-            {
-              navItems.map((item) => (
-                <li>
-                  <a href={item.path}>
-                    <span>{item.emoji}</span>
-                    {item.label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </div>
-    </div>
+      <Footer />
+    </Navbar>
   </body>
 </html>

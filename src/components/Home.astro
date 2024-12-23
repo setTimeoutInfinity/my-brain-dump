@@ -52,9 +52,10 @@ const latestBlog = blogs?.[0];
         >
           <figure class="p-3 shrink-0 md:w-96">
             <Image
-              src={latestBlog.data.cover}
+              src={latestBlog.data.thumbnail}
               alt={latestBlog.data.title}
               class="rounded object-cover object-center !m-0 aspect-video block bg-base-300"
+              loading="lazy"
             />
           </figure>
           <div class="card-body p-3 h-52 overflow-hidden">

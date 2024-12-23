@@ -6,9 +6,11 @@ const blogCollection = defineCollection({
     z.object({
       title: z.string(),
       description: z.string(),
+      image: image(),
+      imageDimensions: z.tuple([z.coerce.number(), z.coerce.number()]),
+      thumbnail: image(),
       cover: image(),
-      coverCaption: z.string().nullish(),
-      coverDimensions: z.tuple([z.coerce.number(), z.coerce.number()]),
+      caption: z.string().nullish(),
       date: z.coerce.date(),
     }),
 });

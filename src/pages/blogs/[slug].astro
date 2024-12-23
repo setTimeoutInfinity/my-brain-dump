@@ -20,7 +20,7 @@ const { blog } = Astro.props;
 const { Content } = await blog.render();
 ---
 
-<Layout>
+<Layout title={blog.data.title}>
   <div class="w-full px-4">
     <div class="mt-5 md:mt-16 mb-10 md:mb-10">
       <figure

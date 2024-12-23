@@ -47,12 +47,13 @@ const titleSuffix = "My Brain Dumps 💩";
       type="font/woff2"
       crossorigin="anonymous"
     />
+    <slot name="head" />
     <title>{title ? `${title} - ${titleSuffix}` : titleSuffix}</title>
   </head>
   <body class="h-screen w-full">
     <Navbar>
       <main class="h-full">
-        <slot />
+        <slot name="body" />
       </main>
 
       <Footer />

@@ -3,6 +3,7 @@ import Footer from "@components/ui/Footer.astro";
 import Navbar from "@components/ui/Navbar.astro";
 
 const { title } = Astro.props;
+const titleSuffix = "My Brain Dumps 💩";
 ---
 
 <!doctype html>
@@ -18,7 +19,7 @@ const { title } = Astro.props;
       media="all"
     />
     <meta name="generator" content={Astro.generator} />
-    <title>{`${title ? `${title} - ` : "" || ""}My Brain Dump 💩`}</title>
+    <title>{title ? `${title} - ${titleSuffix}` : titleSuffix}</title>
   </head>
   <body class="h-screen w-full">
     <Navbar>

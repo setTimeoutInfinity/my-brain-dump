@@ -1,10 +1,7 @@
 ---
 import MenuLine from "@components/ui/icons/menu-line.svg";
 import CloseLargeLine from "@components/ui/icons/close-large-line.svg";
-import InstagramLogo from "@components/ui/icons/instagram-line.svg";
-import LinkedInLogo from "@components/ui/icons/linkedin-line.svg";
-import GithubLogo from "@components/ui/icons/github-line.svg";
-import RobotLineIcon from "@components/ui/icons/robot-3-line.svg";
+import Footer from "@components/ui/Footer.astro";
 
 const { title } = Astro.props;
 
@@ -71,37 +68,7 @@ const navItems = [
           <slot />
         </main>
 
-        <footer class="footer bg-neutral text-neutral-content items-center p-4">
-          <aside class="grid-flow-col items-center">
-            <RobotLineIcon size={46} />
-            <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
-          </aside>
-          <nav
-            class="grid-flow-col gap-4 md:place-self-center md:justify-self-end"
-          >
-            <a
-              class="link hover:text-primary"
-              href="https://www.instagram.com/talouchy_art"
-              target="_blank"
-            >
-              <InstagramLogo size={30} />
-            </a>
-            <a
-              class="link hover:text-primary"
-              href="https://www.linkedin.com/in/danyallakzian/"
-              target="_blank"
-            >
-              <LinkedInLogo size={30} />
-            </a>
-            <a
-              class="link hover:text-primary"
-              href="https://github.com/setTimeoutInfinity"
-              target="_blank"
-            >
-              <GithubLogo size={30} />
-            </a>
-          </nav>
-        </footer>
+        <Footer />
       </div>
       <div class="drawer-side z-20">
         <label

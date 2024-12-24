@@ -1,4 +1,5 @@
 ---
+import { SEO } from "astro-seo";
 import Home from "@components/Home.astro";
 import Layout from "@layouts/Layout.astro";
 
@@ -6,6 +7,18 @@ import HeroImage from "@assets/home-page-hero.webp";
 ---
 
 <Layout>
+  <SEO
+    slot="seo"
+    description="This is a blog where I (Dan) dump my brain farts. The more ridiculous, the better."
+    openGraph={{
+      basic: {
+        title: "My Brain Dumps 💩",
+        type: "article",
+        image: HeroImage.src,
+        url: "https://lakzian.com",
+      },
+    }}
+  />
   <link slot="head" rel="preload" href={HeroImage.src} as="image" />
 
   <Home slot="body" />

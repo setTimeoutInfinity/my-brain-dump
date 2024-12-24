@@ -9,6 +9,7 @@ import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://lakzian.com",
   integrations: [tailwind(), react(), mdx()],
   experimental: {
     svg: {

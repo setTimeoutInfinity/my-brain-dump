@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
+import { SEO } from "astro-seo";
 import Layout from "@layouts/Layout.astro";
 import dayjs from "dayjs";
 import isNil from "lodash/isNil";
@@ -24,6 +25,18 @@ const hasCaption = !isNil(blog.data.caption) && !isEmpty(blog.data.caption);
 ---
 
 <Layout title={blog.data.title}>
+  <SEO
+    slot="seo"
+    description={blog.data.description}
+    openGraph={{
+      basic: {
+        title: blog.data.title,
+        type: "article",
+        image: blog.data.thumbnail.src,
+        url: `https://lakzian.com/blogs/${blog.slug}`,
+      },
+    }}
+  />
   <div slot="body" class="w-full px-4">
     <div class="mt-5 md:mt-16 mb-10 md:mb-10">
       <div id="blog-cover-image-js" class="flex justify-center m-auto">

@@ -7,7 +7,6 @@ const blogCollection = defineCollection({
       title: z.string(),
       description: z.string(),
       image: image(),
-      imageDimensions: z.tuple([z.coerce.number(), z.coerce.number()]),
       thumbnail: image(),
       cover: image(),
       caption: z.string().nullish(),

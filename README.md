@@ -52,7 +52,6 @@ title: "Title of the blog"
 description: "Description of the blog"
 date: 2024-12-23
 image: ./images/file.jpeg
-imageDimensions: [1080, 1080]
 thumbnail: ./images/file-thumb.jpeg
 cover: ./images/file-cover.jpeg
 caption: "Caption of the image (optional)"

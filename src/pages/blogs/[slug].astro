@@ -43,8 +43,8 @@ const hasCaption = !isNil(blog.data.caption) && !isEmpty(blog.data.caption);
         <a
           href={blog.data.image.src}
           data-pswp-src={blog.data.image.src}
-          data-pswp-width={blog.data.imageDimensions[0]}
-          data-pswp-height={blog.data.imageDimensions[1]}
+          data-pswp-width={blog.data.image.width}
+          data-pswp-height={blog.data.image.height}
           data-cropped="true"
           class="cover-grid relative bg-base-300 rounded-2xl border-neutral border md:max-w-4xl shadow-2xl overflow-hidden"
         >

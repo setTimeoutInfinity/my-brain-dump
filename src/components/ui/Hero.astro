@@ -1,0 +1,30 @@
+---
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  image: ImageMetadata;
+  heading: string;
+  subHeading: string;
+}
+
+const { image, heading, subHeading } = Astro.props;
+---
+
+<section>
+  <div
+    class="hero md:h-96 h-52"
+    style={`background-image: url('${image.src}');`}
+  >
+    <div class="hero-overlay" />
+    <div class="hero-content text-neutral-content max-w-4xl w-full mt-auto">
+      <div class="grow">
+        <h1 class="mb-5 md:text-5xl text-3xl font-medium">
+          {heading}
+        </h1>
+        <p class="mb-5 font-body md:text-base text-sm">
+          {subHeading}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

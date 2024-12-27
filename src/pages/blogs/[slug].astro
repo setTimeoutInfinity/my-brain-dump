@@ -28,6 +28,7 @@ const hasCaption = !isNil(blog.data.caption) && !isEmpty(blog.data.caption);
     <div class="mt-5 md:mt-16 mb-10 md:mb-10">
       <div id="blog-cover-image-js" class="flex justify-center m-auto">
         <a
+          href={blog.data.image.src}
           data-pswp-src={blog.data.image.src}
           data-pswp-width={blog.data.imageDimensions[0]}
           data-pswp-height={blog.data.imageDimensions[1]}

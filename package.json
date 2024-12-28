@@ -7,7 +7,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "add-image": "pnpm tsx ./others/optimize-blog-image.ts"
+    "add:blog-image": "pnpm tsx ./others/add-image.ts"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.0.3",

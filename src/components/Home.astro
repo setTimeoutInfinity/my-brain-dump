@@ -31,7 +31,7 @@ const [latestBlog, ...restBlog] = sortedBlogs;
     {
       isNil(latestBlog) ? (
         <div class="card md:card-side bg-base-200 border-neutral border shadow rounded-xl transition-shadow">
-          <div class="card-body items-center justify-center p-3 h-52 overflow-hidden w-max">
+          <div class="card-body items-center justify-center p-2 h-52 overflow-hidden w-max">
             <h3 class="card-title font-normal">No new Dumps</h3>
             <span class="font-body text-sm">
               Don't worry, we're not out of ideas yet! More brain farts coming
@@ -44,16 +44,16 @@ const [latestBlog, ...restBlog] = sortedBlogs;
           href={`/blogs/${latestBlog.slug}`}
           class="card md:card-side border-neutral border hover:shadow-lg rounded-xl cursor-pointer transition-shadow"
         >
-          <figure class="p-3 shrink-0 md:w-96">
+          <figure class="p-2 shrink-0 md:w-96">
             <Image
               src={latestBlog.data.image}
               alt={latestBlog.data.title}
               width={400}
               quality={40}
-              class="rounded object-cover object-center !m-0 aspect-video block bg-base-300 w-full"
+              class="rounded-md object-cover object-center !m-0 aspect-video block bg-base-300 w-full"
             />
           </figure>
-          <div class="card-body p-3 h-52 overflow-hidden">
+          <div class="card-body p-2 h-52 overflow-hidden">
             <h2 class="card-title font-normal">{latestBlog.data.title}</h2>
             <span class="text-xs">
               {dayjs(latestBlog.data.date).format("MMMM DD, YYYY")}
@@ -77,7 +77,7 @@ const [latestBlog, ...restBlog] = sortedBlogs;
       {
         isEmpty(restBlog) ? (
           <div class="card col-span-2 bg-base-200 rounded-xl items-center justify-center">
-            <div class="card-body justify-center p-3 h-52 overflow-hidden w-max">
+            <div class="card-body justify-center p-2 h-52 overflow-hidden w-max">
               <h3 class="card-title font-normal">I'll Keep it Coming</h3>
               <span class="font-body text-sm">Brain Farts in the Making</span>
             </div>
@@ -88,17 +88,17 @@ const [latestBlog, ...restBlog] = sortedBlogs;
               href={`/blogs/${blog.slug}`}
               class="card border hover:shadow-lg rounded-xl cursor-pointer transition-shadow"
             >
-              <figure class="p-3 shrink-0">
+              <figure class="p-2 shrink-0">
                 <Image
                   src={blog.data.image}
                   alt={blog.data.title}
                   width={400}
                   quality={40}
-                  class="rounded object-cover object-center !m-0 aspect-video block bg-base-300 w-full"
+                  class="rounded-md object-cover object-center !m-0 aspect-video block bg-base-300 w-full"
                 />
               </figure>
 
-              <div class="card-body p-3 h-52 overflow-hidden">
+              <div class="card-body p-2 h-52 overflow-hidden">
                 <h2 class="card-title font-normal">{blog.data.title}</h2>
                 <span class="text-xs">
                   {dayjs(blog.data.date).format("MMMM DD, YYYY")}

@@ -2,7 +2,6 @@
 import MenuLine from "@components/ui/icons/menu-line.svg";
 import CloseLargeLine from "@components/ui/icons/close-large-line.svg";
 
-
 const navBarTitle = "My Brain Dumps 💩";
 const navItems = [
   { label: "Home", path: "/", emoji: "🏡" },
@@ -24,6 +23,7 @@ const navItems = [
           class="btn btn-square btn-ghost"
         >
           <MenuLine size={24} />
+          <span class="hidden">open drawer button</span>
         </label>
       </div>
       <div class="flex-1 text-lg font-medium mx-2 px-2">
@@ -49,8 +49,9 @@ const navItems = [
     <slot />
   </div>
   <div class="drawer-side z-20">
-    <label for="app-drawer" aria-label="close sidebar" class="drawer-overlay"
-    ></label>
+    <label for="app-drawer" aria-label="close sidebar" class="drawer-overlay">
+      <span class="hidden">close drawer overlay</span></label
+    >
 
     <div class="bg-base-200 min-h-full w-80">
       <div class="flex items-center p-2 bg-base-300 border-neutral border-b">
@@ -60,6 +61,7 @@ const navItems = [
           class="btn btn-square btn-ghost"
         >
           <CloseLargeLine size={24} />
+          <span class="hidden">close drawer button</span>
         </label>
         <span class="flex-1 text-lg font-medium mx-2 px-2">{navBarTitle}</span>
       </div>

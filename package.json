@@ -6,8 +6,7 @@
     "dev": "astro dev --host",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "add:blog-image": "pnpm tsx ./others/add-image.ts"
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.0.3",
@@ -29,10 +28,6 @@
     "@flydotio/dockerfile": "^0.5.9",
     "@tailwindcss/typography": "^0.5.15",
     "@types/lodash": "^4.17.13",
-    "@types/node": "^22.10.2",
-    "daisyui": "^4.12.22",
-    "fs": "0.0.1-security",
-    "path": "^0.12.7",
-    "tsx": "^4.19.2"
+    "daisyui": "^4.12.22"
   }
 }

@@ -1,6 +1,6 @@
 export async function getAlbumImages(albumId: string) {
   let images = import.meta.glob<{ default: ImageMetadata }>(
-    "/src/content/albums/**/*.{webp,jpg}"
+    "/src/content/albums/**/*.{webp,jpg,jpeg}"
   );
 
   images = Object.fromEntries(

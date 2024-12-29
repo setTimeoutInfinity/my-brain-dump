@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 
 const { album } = Astro.props;
 const images = await getAlbumImages(album.id);
-const chunkSize = Math.ceil(images.length / 3);
+const chunkSize = Math.ceil(images.length / 4);
 const imagesChunks = chunk(images, chunkSize);
 ---
 
@@ -50,7 +50,7 @@ const imagesChunks = chunk(images, chunkSize);
     <div class="max-w-4xl w-full mx-auto p-4">
       <div
         id="album-cover-image-js"
-        class="grid grid-cols-2 md:grid-cols-3 gap-4"
+        class="grid grid-cols-2 md:grid-cols-4 gap-4"
       >
         {
           imagesChunks.flatMap((images) => {

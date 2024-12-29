@@ -52,30 +52,11 @@ title: "Title of the blog"
 description: "Description of the blog"
 date: 2024-12-23
 image: ./images/file.jpeg
-thumbnail: ./images/file-thumb.jpeg
-cover: ./images/file-cover.jpeg
 caption: "Caption of the image (optional)"
 ---
 ```
-3. You can add blog images to `src/content/blogs/images/*` with the actual path to your image file. For more information on adding images, refer to [Adding Blog images](#adding-blog-images).
+3. You can add blog images to `src/content/blogs/images/*` with the actual path to your image file.
 4. Write your blog post content below using markdown syntax.
 6. Done! 🎉
 
 Note: Make sure to optimize your images for web use before adding them to your blog post.
-
-## Adding Blog images
-
-To add blog images, you can use the `others/optimize-blog-image.ts` script to optimize and resize your images for web use. Here's how to do it:
-
-1. Run the following command in your terminal or command prompt, replacing `<path-to-image>` with the actual path to your image file:
-```
-pnpm add-image <path-to-image>
-```
-This script will automatically generate three versions of your image: `thumb`, `cover`, and `original`, each optimized for different use cases. The images will be saved in the `src/content/blogs/images` directory with the corresponding suffixes.
-
-For example, if your original image is named `example.jpg`, the script will generate the following files:
-* `example-thumb.webp` for thumbnails
-* `example-cover.webp` for cover images
-* `example-original.webp` for the original image
-
-You can then reference these optimized images in your blog posts using the corresponding file names.

@@ -12,7 +12,18 @@ const blogCollection = defineCollection({
     }),
 });
 
+const albumCollection = defineCollection({
+  type: "data",
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      cover: image(),
+    }),
+});
+
 // This key should match your collection directory name in "src/content"
 export const collections = {
   blogs: blogCollection,
+  albums: albumCollection,
 };

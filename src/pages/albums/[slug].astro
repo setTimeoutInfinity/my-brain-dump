@@ -1,0 +1,99 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import { SEO } from "astro-seo";
+import chunk from "lodash/chunk";
+import Layout from "@layouts/Layout.astro";
+import { getAlbumImages } from "@utils/ablums";
+import Hero from "@components/ui/Hero.astro";
+
+export async function getStaticPaths() {
+  const albums = await getCollection("albums");
+
+  const paths = Object.values(albums).map((album) => {
+    return {
+      params: { slug: album.id },
+      props: { album },
+    };
+  });
+
+  return paths;
+}
+
+const { album } = Astro.props;
+const images = await getAlbumImages(album.id);
+const chunkSize = Math.ceil(images.length / 3);
+const imagesChunks = chunk(images, chunkSize);
+---
+
+<Layout>
+  <SEO
+    slot="seo"
+    description={album.data.description}
+    openGraph={{
+      basic: {
+        title: album.data.title,
+        type: "website",
+        image: album.data.cover.src,
+        url: `https://lakzian.com/albums/${album.id}`,
+      },
+    }}
+  />
+
+  <Hero
+    image={album.data.cover}
+    heading={album.data.title}
+    subHeading={album.data.description}
+  />
+
+  <section>
+    <div class="max-w-4xl w-full mx-auto p-4">
+      <div
+        id="album-cover-image-js"
+        class="grid grid-cols-2 md:grid-cols-3 gap-4"
+      >
+        {
+          imagesChunks.flatMap((images) => {
+            return (
+              <div class="grid gap-4">
+                {images.map((image) => (
+                  <a
+                    href={image.src}
+                    data-pswp-src={image.src}
+                    data-pswp-width={image.width}
+                    data-pswp-height={image.height}
+                    data-cropped="true"
+                    class="relative bg-base-300 rounded-2xl border-neutral border overflow-hidden"
+                  >
+                    <Image
+                      src={image}
+                      class="rounded object-cover object-center !m-0 h-full"
+                      alt=""
+                      width={640}
+                      quality={70}
+                    />
+                  </a>
+                ))}
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<!-- register photo swipe library -->
+<script>
+  import "photoswipe/style.css";
+  import pswpModule from "photoswipe";
+  import PhotoSwipe from "photoswipe/lightbox";
+
+  const lightbox = new PhotoSwipe({
+    pswpModule,
+    children: "a",
+    gallery: "#album-cover-image-js",
+  });
+
+  lightbox.init();
+</script>

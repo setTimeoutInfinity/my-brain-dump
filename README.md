@@ -10,9 +10,9 @@ This project is built using Astro, a modern web framework for building fast, sca
 
 The primary goal of this project is to create a space where I can share my thoughts, ideas, and experiences with others. Through this blog, I aim to:
 
-* Document my learning journey in software engineering and related fields
-* Share my passion for photography and storytelling
-* Reflect on my personal growth and life experiences
+- Document my learning journey in software engineering and related fields
+- Share my passion for photography and storytelling
+- Reflect on my personal growth and life experiences
 
 ## Running the Development Environment
 
@@ -55,8 +55,24 @@ image: ./images/file.jpeg
 caption: "Caption of the image (optional)"
 ---
 ```
+
 3. You can add blog images to `src/content/blogs/images/*` with the actual path to your image file.
 4. Write your blog post content below using markdown syntax.
-6. Done! 🎉
+5. Done! 🎉
 
 Note: Make sure to optimize your images for web use before adding them to your blog post.
+
+## Adding Photo Albums
+
+To add a new photo album to the website, follow these steps:
+
+1. Create a new directory in the `src/content/albums` directory. The directory name should be kebab-case e.g. `name-of-my-new-album`.
+2. Create a `yml` file in the `src/content/albums` directory with the same name as the directory created in step 1. The filename should be kebab-case e.g. `name-of-my-new-album.yml`.
+3. Inside the new directory, place all photo album images.
+4. In the `yml` file, include the following properties:
+```
+title: "Title of the photo album"
+description: "Description of the photo album"
+cover: "./name-of-my-new-album/image-1.webp"
+```
+6. Done! 🎉

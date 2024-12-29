@@ -46,10 +46,11 @@ const [latestBlog, ...restBlog] = sortedBlogs;
         >
           <figure class="p-3 shrink-0 md:w-96">
             <Image
-              src={latestBlog.data.thumbnail}
+              src={latestBlog.data.image}
               alt={latestBlog.data.title}
+              width={400}
+              quality={40}
               class="rounded object-cover object-center !m-0 aspect-video block bg-base-300 w-full"
-              loading="lazy"
             />
           </figure>
           <div class="card-body p-3 h-52 overflow-hidden">
@@ -89,10 +90,11 @@ const [latestBlog, ...restBlog] = sortedBlogs;
             >
               <figure class="p-3 shrink-0 \">
                 <Image
-                  src={blog.data.thumbnail}
+                  src={blog.data.image}
                   alt={blog.data.title}
+                  width={400}
+                  quality={40}
                   class="rounded object-cover object-center !m-0 aspect-video block bg-base-300 w-full"
-                  loading="lazy"
                 />
               </figure>
 

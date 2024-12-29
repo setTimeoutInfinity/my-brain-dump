@@ -50,6 +50,7 @@ const [latestBlog, ...restBlog] = sortedBlogs;
               alt={latestBlog.data.title}
               width={400}
               quality={40}
+              loading="eager"
               class="rounded-md object-cover object-center !m-0 aspect-video block bg-base-300 w-full"
             />
           </figure>
@@ -94,6 +95,7 @@ const [latestBlog, ...restBlog] = sortedBlogs;
                   alt={blog.data.title}
                   width={400}
                   quality={40}
+                  loading="eager"
                   class="rounded-md object-cover object-center !m-0 aspect-video block bg-base-300 w-full"
                 />
               </figure>

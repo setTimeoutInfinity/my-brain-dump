@@ -18,6 +18,7 @@ const { image, heading, subHeading } = Astro.props;
       densities={[1.5, 2]}
       width={image.width /2}
       alt="page hero"
+      loading="eager"
       class="col-span-full object-cover object-center md:h-96 h-52"
     />
     <div class="hero-overlay"></div>

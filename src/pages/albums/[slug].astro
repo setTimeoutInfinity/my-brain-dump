@@ -26,7 +26,7 @@ const chunkSize = Math.ceil(images.length / 4);
 const imagesChunks = chunk(images, chunkSize);
 ---
 
-<Layout>
+<Layout title={album.data.title}>
   <SEO
     slot="seo"
     description={album.data.description}

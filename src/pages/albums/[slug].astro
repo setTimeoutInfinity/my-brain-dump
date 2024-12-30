@@ -8,6 +8,7 @@ import { getAlbumImages } from "@utils/ablums";
 import Hero from "@components/ui/Hero.astro";
 import ImageGalleryStructuredData from "@components/seo/ImageGalleryStructuredData.astro";
 
+export const prerender = true;
 export async function getStaticPaths() {
   const albums = await getCollection("albums");
 

@@ -13,6 +13,7 @@ interface Props {
   blog: CollectionEntry<"blogs">;
 }
 
+export const prerender = true;
 export async function getStaticPaths() {
   const blogPosts = await getCollection("blogs");
   return blogPosts.map((blog: any) => ({

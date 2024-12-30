@@ -19,6 +19,8 @@ const albumCollection = defineCollection({
       title: z.string(),
       description: z.string(),
       cover: image(),
+      date: z.coerce.date(),
+      location: z.string(),
     }),
 });
 

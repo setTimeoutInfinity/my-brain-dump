@@ -3,10 +3,11 @@ import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import { getImage, Image } from "astro:assets";
 import { SEO } from "astro-seo";
-import Layout from "@layouts/Layout.astro";
 import dayjs from "dayjs";
 import isNil from "lodash/isNil";
 import isEmpty from "lodash/isEmpty";
+import Layout from "@layouts/Layout.astro";
+import BlogPostStructuredData from "@components/seo/BlogPostStructuredData.astro";
 
 interface Props {
   blog: CollectionEntry<"blogs">;
@@ -30,6 +31,14 @@ const imageThumb = await getImage({
 ---
 
 <Layout title={blog.data.title}>
+  <BlogPostStructuredData
+    slot="structured-data"
+    headline={blog.data.title}
+    imageURL={blog.data.image}
+    imageCaption={blog.data.caption || `Image cover for ${blog.data.title}`}
+    description={blog.data.description}
+    datePublished={blog.data.date}
+  />
   <SEO
     slot="seo"
     description={blog.data.description}

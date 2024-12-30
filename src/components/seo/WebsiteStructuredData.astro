@@ -1,0 +1,15 @@
+---
+const { name } = Astro.props;
+
+const pageUrl = new URL(Astro.url.pathname, Astro.site);
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org/",
+  "@type": "WebSite",
+  name: name || "Danyal Lakzian",
+  alternateName: [name || "Danyal Lakzian", "lakzian.com"],
+  url: pageUrl,
+});
+---
+
+<script type="application/ld+json" set:html={schema} />

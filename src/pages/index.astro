@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import { SEO } from "astro-seo";
 import Layout from "@layouts/Layout.astro";
 import Hero from "@components/ui/Hero.astro";
+import WebsiteStructuredData from "@components/seo/WebsiteStructuredData.astro";
 
 import AmazonIcon from "@components/ui/icons/amazon-line.svg";
 import Css3Icon from "@components/ui/icons/css3-line.svg";
@@ -101,6 +102,7 @@ const techsAndTools = [
 ---
 
 <Layout title="My Personal Website">
+  <WebsiteStructuredData slot="structured-data" />
   <SEO
     slot="seo"
     description="Danyal Lakzian's personal website: where sanity goes to die and questionable life choices are celebrated."

@@ -1,0 +1,43 @@
+---
+import type { ImageMetadata } from "astro";
+import { getImage } from "astro:assets";
+import dayjs from "dayjs";
+
+import { personSchema } from "@constants/seo";
+
+interface Props {
+  headline: string;
+  imageURL: ImageMetadata;
+  imageCaption: string;
+  description: string;
+  datePublished: Date;
+}
+const { headline, imageURL, description, datePublished, imageCaption } =
+  Astro.props;
+const thumbnailURL = await getImage({ src: imageURL, width: 400, quality: 40 });
+
+const pageUrl = new URL(Astro.url.pathname, Astro.site);
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: headline,
+  thumbnailUrl: thumbnailURL.src,
+  description: description,
+  datePublished: dayjs(datePublished).format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
+  name: headline,
+  url: pageUrl,
+  inLanguage: "en-AU",
+  image: {
+    "@type": "ImageObject",
+    url: imageURL.src,
+    contentUrl: imageURL.src,
+    width: imageURL.width,
+    height: imageURL.height,
+    caption: imageCaption,
+  },
+  author: { ...personSchema },
+});
+---
+
+<script type="application/ld+json" set:html={schema} />

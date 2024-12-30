@@ -1,0 +1,39 @@
+---
+import dayjs from "dayjs";
+
+import { personSchema } from "@constants/seo";
+
+interface Props {
+  headline: string;
+  description: string;
+  datePublished: Date;
+  imageURLs: string[];
+  keywords: string[];
+  location?: string;
+}
+const { headline, description, datePublished, imageURLs, keywords, location } =
+  Astro.props;
+
+const pageUrl = new URL(Astro.url.pathname, Astro.site);
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ImageGallery",
+  name: headline,
+  description: description,
+  url: pageUrl,
+  creator: { ...personSchema },
+  datePublished: dayjs(datePublished).format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
+  image: imageURLs,
+  ...(location ? {
+    contentLocation: {
+      "@type": "Place",
+      name: location,
+    },
+  } : {}),
+  keywords: keywords.join(", "),
+  mainEntityOfPage: pageUrl,
+});
+---
+
+<script type="application/ld+json" set:html={schema} />

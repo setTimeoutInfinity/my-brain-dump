@@ -6,6 +6,7 @@ import chunk from "lodash/chunk";
 import Layout from "@layouts/Layout.astro";
 import { getAlbumImages } from "@utils/ablums";
 import Hero from "@components/ui/Hero.astro";
+import ImageGalleryStructuredData from "@components/seo/ImageGalleryStructuredData.astro";
 
 export async function getStaticPaths() {
   const albums = await getCollection("albums");
@@ -22,11 +23,21 @@ export async function getStaticPaths() {
 
 const { album } = Astro.props;
 const images = await getAlbumImages(album.id);
+const imageURLs = images.map((image) => image.src);
 const chunkSize = Math.ceil(images.length / 4);
 const imagesChunks = chunk(images, chunkSize);
 ---
 
 <Layout title={album.data.title}>
+  <ImageGalleryStructuredData
+    slot="structured-data"
+    headline={album.data.title}
+    description={album.data.description}
+    datePublished={album.data.date}
+    imageURLs={imageURLs}
+    location={album.data.location}
+    keywords={[]}
+  />
   <SEO
     slot="seo"
     description={album.data.description}

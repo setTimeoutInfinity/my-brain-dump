@@ -33,7 +33,7 @@ const navItems = [
         <ul class="menu menu-lg menu-horizontal">
           <!-- Navbar menu content here -->
           {
-            navItems.reverse().map((item) => (
+            [...navItems].reverse().map((item) => (
               <li>
                 <a href={item.path}>
                   <span>{item.emoji}</span>

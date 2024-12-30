@@ -1,14 +1,17 @@
 ---
-import HeroImage from "@assets/home-page-hero.webp";
+import { getImage } from "astro:assets";
 import InstagramLogo from "@components/ui/icons/instagram-line.svg";
 import LinkedInLogo from "@components/ui/icons/linkedin-line.svg";
 import GithubLogo from "@components/ui/icons/github-line.svg";
 import RobotLineIcon from "@components/ui/icons/robot-3-line.svg";
+import Image from "@assets/footer-background.webp";
+
+const backgroundImage = await getImage({ src: Image, quality: 80 });
 ---
 
 <footer
   class="footer bg-neutral text-neutral-content items-center p-4"
-  style={`background-image: url('${HeroImage.src}');`}
+  style={`background-image: url('${backgroundImage.src}');`}
 >
   <aside class="grid-flow-col items-center">
     <RobotLineIcon size={46} />

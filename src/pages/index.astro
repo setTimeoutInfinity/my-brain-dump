@@ -1,9 +1,103 @@
 ---
+import { Image } from "astro:assets";
 import { SEO } from "astro-seo";
 import Layout from "@layouts/Layout.astro";
 import Hero from "@components/ui/Hero.astro";
 
+import AmazonIcon from "@components/ui/icons/amazon-line.svg";
+import Css3Icon from "@components/ui/icons/css3-line.svg";
+import GoogleIcon from "@components/ui/icons/google-line.svg";
+import Html5Icon from "@components/ui/icons/html5-line.svg";
+import JavascriptIcon from "@components/ui/icons/javascript-line.svg";
+import NodejsIcon from "@components/ui/icons/nodejs-line.svg";
+import NpmjsIcon from "@components/ui/icons/npmjs-line.svg";
+import PhpIcon from "@components/ui/icons/php-line.svg";
+import ReactjsIcon from "@components/ui/icons/reactjs-line.svg";
+import RemixRunIcon from "@components/ui/icons/remix-run-line.svg";
+import SvelteIcon from "@components/ui/icons/svelte-line.svg";
+import TailwindCssIcon from "@components/ui/icons/tailwind-css-line.svg";
+import UbuntuIcon from "@components/ui/icons/ubuntu-line.svg";
+import VuejsIcon from "@components/ui/icons/vuejs-line.svg";
+
 import HeroImage from "@assets/home-page-hero.webp";
+import MyImage from "@assets/walhalla-australian-alps-hike-4.webp";
+
+const techsAndTools = [
+  {
+    label: "CSS3",
+    Icon: Css3Icon,
+    tooltip: "Styling the web like it's a runway",
+  },
+  {
+    label: "HTML5",
+    Icon: Html5Icon,
+    tooltip:
+      "Not a language, just the foundation for every argument on StackOverflow",
+  },
+  {
+    label: "JavaScript",
+    Icon: JavascriptIcon,
+    tooltip:
+      "With TypeScript, without TypeScript. JavaScript's your unpredictable ex",
+  },
+  {
+    label: "NodeJs",
+    Icon: NodejsIcon,
+    tooltip: "JavaScript with a server-side identity crisis",
+  },
+  {
+    label: "npm",
+    Icon: NpmjsIcon,
+    tooltip: "Where 'dependencies' means `I'm too lazy to do this myself`",
+  },
+  {
+    label: "PHP",
+    Icon: PhpIcon,
+    tooltip:
+      "Back in the day, I was Persian Harry Potter. Now I just cast 'deprecated' spells",
+  },
+  {
+    label: "React",
+    Icon: ReactjsIcon,
+    tooltip: "A community so big, it makes the library feel like a cult",
+  },
+  {
+    label: "Go",
+    Icon: GoogleIcon,
+    tooltip: "Need to add a Go project to my github",
+  },
+  {
+    label: "Remix-run",
+    Icon: RemixRunIcon,
+    tooltip: "Ryan, you genius, now stop changing everything",
+  },
+  {
+    label: "Svelte",
+    Icon: SvelteIcon,
+    tooltip: "A cleaner, simpler React. but with a bit more flair",
+  },
+  {
+    label: "AWS",
+    Icon: AmazonIcon,
+    tooltip: "Because Jeff needs more yachts",
+  },
+  {
+    label: "Tailwind",
+    Icon: TailwindCssIcon,
+    tooltip: "Class-ifying everything, one utility at a time 🤦‍♂️",
+  },
+  {
+    label: "Linux",
+    Icon: UbuntuIcon,
+    tooltip: "The OS that makes you feel elite for no reason",
+  },
+  {
+    label: "Vue",
+    Icon: VuejsIcon,
+    tooltip:
+      "The most solid thing to come out of China since the Great Wall (thanks, Evan)",
+  },
+];
 ---
 
 <Layout>
@@ -22,4 +116,61 @@ import HeroImage from "@assets/home-page-hero.webp";
   <link slot="head" rel="preload" href={HeroImage.src} as="image" />
 
   <Hero />
+
+  <section>
+    <div class="max-w-4xl w-full mx-auto px-4 md:-mt-72 -mt-36">
+      <div class="card bg-base-100 image-full w-full shadow-xl mx-auto">
+        <figure>
+          <Image
+            src={MyImage}
+            alt="Danyal on a hike in the Australian Alps"
+            width={MyImage.width / 2}
+            densities={[1.5, 2]}
+            loading="eager"
+            class="object-cover object-center"
+          />
+        </figure>
+        <div class="card-body">
+          <h1 class="card-title md:text-5xl text-3xl font-medium">
+            Hi! I'm Danyal 👨‍💻
+          </h1>
+          <span class="font-body md:text-base text-sm">
+            A software engineer trying to solve even the smallest problems,
+            because the big ones are too hard
+          </span>
+          <div class="mt-5">
+            <h2 class="md:text-lg text-md font-bold">
+              Here are some technologies and tools I've worked with
+            </h2>
+            <div class="flex flex-wrap gap-5 mt-2">
+              {
+                techsAndTools.map(({ label, Icon, tooltip }, i) => (
+
+                  <label
+                    class="badge select-none cursor-pointer flex gap-1 items-center justify-center"
+                    for={`tech-badge-${i}`}
+                  >
+                    <Icon class="w-5" />
+                    {label}
+                  </label>
+                  <input type="checkbox" id={`tech-badge-${i}`} class="modal-toggle" />
+                  <div class="modal" role="dialog">
+                    <div class="modal-box bg-neutral text-neutral-content">
+                      <Icon class="w-10" />
+                      <p class="py-4">{tooltip}</p>
+                    </div>
+                    <label class="modal-backdrop" for={`tech-badge-${i}`}>Close</label>
+                  </div>
+                ))
+              }
+            </div>
+            <span class="text-xs font-thin">Some are missing because I couldn't find the matching SVG</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <section class="h-96"></section>
 </Layout>

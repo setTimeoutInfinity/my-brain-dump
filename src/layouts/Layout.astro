@@ -3,7 +3,7 @@ import Footer from "@components/ui/Footer.astro";
 import Navbar from "@components/ui/Navbar.astro";
 
 const { title } = Astro.props;
-const titleSuffix = "My Brain Dumps 💩";
+const titleSuffix = "Danyal Lakzian";
 ---
 
 <!doctype html>
@@ -53,7 +53,7 @@ const titleSuffix = "My Brain Dumps 💩";
     <title>{title ? `${title} - ${titleSuffix}` : titleSuffix}</title>
   </head>
   <body class="h-screen w-full">
-    <Navbar>
+    <Navbar pageTitle={title}>
       <main class="h-full">
         <slot />
       </main>

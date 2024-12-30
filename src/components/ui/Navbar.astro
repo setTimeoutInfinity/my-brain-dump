@@ -2,7 +2,9 @@
 import MenuLine from "@components/ui/icons/menu-line.svg";
 import CloseLargeLine from "@components/ui/icons/close-large-line.svg";
 
-const navBarTitle = "My Brain Dumps 💩";
+const { pageTitle } = Astro.props;
+
+const navBarTitle = pageTitle ?? "My Brain Dumps 💩";
 const navItems = [
   { label: "Home", path: "/", emoji: "🏡" },
   { label: "Blogs", path: "/blogs", emoji: "📝" },

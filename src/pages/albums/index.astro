@@ -36,20 +36,20 @@ const albums = await getCollection("albums");
           albums.map((album) => (
             <a
               href={`/albums/${album.id}`}
-              class="card border-neutral border hover:shadow-lg rounded-xl cursor-pointer transition-all overflow-hidden"
+              class="card image-full border-neutral border hover:shadow-lg cursor-pointer transition-all overflow-hidden"
             >
-              <div class="card-body relative p-0 grid">
-                <figure class="col-span-full row-span-full p-0">
-                  <Image
-                    src={album.data.cover}
-                    alt={album.data.title}
-                    class="object-cover object-center !m-0 aspect-video block bg-base-300 w-full"
-                    width={400}
-                    quality={40}
-                    loading="eager"
-                  />
-                </figure>
-                <div class="col-span-full row-span-full flex flex-col justify-end bg-gradient-to-b from-transparent from-40% to-zinc-900 to-90% text-white transition-all p-4 hover:to-100% hover:from-10% hover:pb-10 hover:backdrop-blur-sm">
+              <figure>
+                <Image
+                  src={album.data.cover}
+                  alt={album.data.title}
+                  class="object-cover object-center !m-0 aspect-video block bg-base-300 w-full"
+                  width={400}
+                  quality={40}
+                  loading="eager"
+                />
+              </figure>
+              <div class="card-body relative p-0">
+                <div class="col-span-full row-span-full grow flex flex-col justify-end bg-gradient-to-b from-transparent from-40% to-zinc-900 to-90% text-white transition-all p-4 hover:to-100% hover:from-10% hover:pb-10 hover:backdrop-blur-sm">
                   <h2 class="font-medium text-lg">{album.data.title}</h2>
                   <span class="font-body font-thin text-sm">
                     {album.data.description}

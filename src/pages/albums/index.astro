@@ -6,6 +6,7 @@ import HeroImage from "@assets/albums-page-hero.webp";
 import Layout from "@layouts/Layout.astro";
 import Hero from "@components/ui/Hero.astro";
 
+export const prerender = true;
 const albums = await getCollection("albums");
 ---
 

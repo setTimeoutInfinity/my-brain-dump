@@ -11,6 +11,7 @@ import ArrowRight from "@components/ui/icons/arrow-right-line.svg";
 import Hero from "@components/ui/Hero.astro";
 import HeroImage from "@assets/blogs-page-hero.webp";
 
+export const prerender = true;
 const blogs = await getCollection("blogs");
 
 const sortedBlogs = blogs.sort((a: { data: any }, b: { data: any }) =>

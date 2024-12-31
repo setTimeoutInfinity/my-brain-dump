@@ -2,7 +2,7 @@
 
 # Adjust NODE_VERSION as desired
 ARG NODE_VERSION=22.9.0
-FROM node:${NODE_VERSION}-slim as base
+FROM node:${NODE_VERSION}-alpine AS base
 
 LABEL fly_launch_runtime="Astro"
 
@@ -12,21 +12,22 @@ WORKDIR /app
 # Set production environment
 ENV NODE_ENV="production"
 
-# Install pnpm
-ARG PNPM_VERSION=9.14.4
-RUN npm install -g pnpm@$PNPM_VERSION
-
-
-# Throw-away build stage to reduce size of final image
-FROM base as build
-
-# Install packages needed to build node modules
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3
-
-# Install node modules
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile --prod=false
+
+# pin pnpm version
+ARG PNPM_VERSION=9.14.4
+
+FROM base AS prod-deps
+RUN npm install -g pnpm@$PNPM_VERSION && \
+    pnpm install --frozen-lockfile --prod=true && \
+    rm -rf /root/.pnpm-store
+
+FROM base AS build-deps
+RUN npm install -g pnpm@$PNPM_VERSION && \
+    pnpm install --frozen-lockfile --prod=false && \
+    rm -rf /root/.pnpm-store
+
+FROM build-deps AS build
 
 # Copy application code
 COPY . .
@@ -34,16 +35,17 @@ COPY . .
 # Build application
 RUN pnpm run build
 
-# Remove development dependencies
-RUN pnpm prune --prod
+FROM base AS runtime
 
+# Copy node_modules and build artifacts
+COPY --from=prod-deps /app/node_modules ./node_modules
+COPY --from=build /app/dist ./dist
 
-# Final stage for app image
-FROM nginx
+# Create and switch to a non-root user
+RUN adduser -D -g '' appuser
+USER appuser
 
-# Copy built application
-COPY --from=build /app/dist /usr/share/nginx/html
-
-# Start the server by default, this can be overwritten at runtime
-EXPOSE 80
-CMD [ "/usr/sbin/nginx", "-g", "daemon off;" ]
+ENV HOST=0.0.0.0
+ENV PORT=4321
+EXPOSE 4321
+CMD [ "node", "./dist/server/entry.mjs" ]

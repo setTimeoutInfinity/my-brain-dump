@@ -29,8 +29,8 @@ const navItems = [
           <span class="hidden">open drawer button</span>
         </label>
       </div>
-      <div class="flex-1 text-lg font-medium mx-2 px-2">
-        <a href="/">{navBarTitle}</a>
+      <div class="flex-1 text-lg font-medium mx-2 px-2 overflow-hidden">
+        <a href="/" class="truncate">{navBarTitle}</a>
       </div>
       <div class="hidden flex-none lg:block">
         <ul class="menu menu-lg menu-horizontal">
@@ -51,7 +51,7 @@ const navItems = [
     <!-- Page content here -->
     <slot />
   </div>
-  <div class="drawer-side z-20">
+  <div class="drawer-side z-30">
     <label for="app-drawer" aria-label="close sidebar" class="drawer-overlay">
       <span class="hidden">close drawer overlay</span></label
     >
@@ -66,7 +66,7 @@ const navItems = [
           <CloseLargeLine size={24} />
           <span class="hidden">close drawer button</span>
         </label>
-        <span class="flex-1 text-lg font-medium mx-2 px-2">{navBarTitle}</span>
+        <span class="flex-1 text-lg font-medium truncate mx-2 px-2">{navBarTitle}</span>
       </div>
 
       <ul class="menu menu-lg p-2">

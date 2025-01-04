@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 
 import tailwind from "@astrojs/tailwind";
 
@@ -24,4 +24,26 @@ export default defineConfig({
   adapter: node({
     mode: "standalone",
   }),
+
+  env: {
+    schema: {
+      RECAPTCHA_SITE_KEY: envField.string({
+        context: "client",
+        access: "public",
+      }),
+      RECAPTCHA_SECRET_KEY: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      TELEGRAM_BOT_TOKEN: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      TELEGRAM_ADMIN_CHAT_ID: envField.number({
+        context: "server",
+        access: "secret",
+        default: 96529466,
+      }),
+    },
+  },
 });

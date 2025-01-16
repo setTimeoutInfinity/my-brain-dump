@@ -1,7 +1,6 @@
 ---
 import { actions, isInputError } from "astro:actions";
 import { SEO } from "astro-seo";
-import { RECAPTCHA_SITE_KEY } from "astro:env/client";
 import isEmpty from "lodash/isEmpty";
 import Layout from "@layouts/Layout.astro";
 import Hero from "@components/ui/Hero.astro";
@@ -12,6 +11,10 @@ import ErrorIcon from "@components/ui/icons/error-warning-line.svg";
 import HeroImage from "@assets/home-page-hero.webp";
 
 export const prerender = false;
+
+const siteKey =
+  import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY ??
+  process.env.PUBLIC_RECAPTCHA_SITE_KEY;
 const result = Astro.getActionResult(actions.contactMe);
 const inputErrors = isInputError(result?.error) ? result.error.fields : {};
 ---
@@ -145,7 +148,7 @@ const inputErrors = isInputError(result?.error) ? result.error.fields : {};
         </label>
         <div class="flex justify-end col-span-full">
           <button
-            data-sitekey={RECAPTCHA_SITE_KEY}
+            data-sitekey={siteKey}
             data-callback="onSubmit"
             data-action="submit"
             class="g-recaptcha btn btn-primary w-full md:max-w-xs"

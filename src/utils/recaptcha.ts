@@ -1,4 +1,4 @@
-import { RECAPTCHA_SECRET_KEY } from "astro:env/server";
+import { RECAPTCHA_SECRET_KEY } from "@constants/env";
 
 export async function verifyRecaptchaToken(token: string): Promise<boolean> {
   const recaptchaURL = "https://www.google.com/recaptcha/api/siteverify";

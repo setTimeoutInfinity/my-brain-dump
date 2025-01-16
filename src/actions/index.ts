@@ -1,7 +1,7 @@
 import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:schema";
-import { TELEGRAM_BOT_TOKEN, TELEGRAM_ADMIN_CHAT_ID } from "astro:env/server";
 import { verifyRecaptchaToken } from "@utils/recaptcha";
+import { TELEGRAM_ADMIN_CHAT_ID, TELEGRAM_BOT_TOKEN } from "@constants/env";
 
 export const server = {
   contactMe: defineAction({
@@ -23,7 +23,6 @@ export const server = {
       "g-recaptcha-response": z.string().min(0),
     }),
     handler: async (input) => {
-      await new Promise(resolve => setTimeout(resolve, 5000));
       const isVerified = verifyRecaptchaToken(input["g-recaptcha-response"]);
 
       if (!isVerified) {

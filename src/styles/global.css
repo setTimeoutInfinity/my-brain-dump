@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --default-font-family: Barlow, comic sans ms, "sans-serif";
+
+  --font-sans: Barlow;
+  --font-serif: Rubik;
+  --font-display: Barlow;
+  --font-body: Rubik;
+
+}
+
+@plugin "daisyui" {
+  themes: cmyk;
+}

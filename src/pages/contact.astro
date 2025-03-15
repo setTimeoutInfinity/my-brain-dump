@@ -45,7 +45,7 @@ const inputErrors = isInputError(result?.error) ? result.error.fields : {};
     <div class="max-w-4xl w-full mx-auto px-4 mt-10">
       {
         result && !result.error && (
-          <div role="alert" class="alert alert-success">
+          <div role="alert" class="alert alert-soft alert-success">
             <CheckIcon class="w-5" />
             <span>Message sent 🎉</span>
           </div>
@@ -53,7 +53,7 @@ const inputErrors = isInputError(result?.error) ? result.error.fields : {};
       }
       {
         (!isEmpty(Object.keys(inputErrors)) || result?.error) && (
-          <div role="alert" class="alert alert-error">
+          <div role="alert" class="alert alert-soft alert-error">
             <ErrorIcon class="w-5" />
             <span>Oops! Error 😬</span>
           </div>
@@ -61,7 +61,7 @@ const inputErrors = isInputError(result?.error) ? result.error.fields : {};
       }
       {
         inputErrors?.["g-recaptcha-response"] && (
-          <div role="alert" class="alert alert-error">
+          <div role="alert" class="alert alert-soft alert-error">
             <ErrorIcon class="w-5" />
             <span>Uh-oh! It looks like you're a robot in disguise. 🤖</span>
           </div>
@@ -72,80 +72,85 @@ const inputErrors = isInputError(result?.error) ? result.error.fields : {};
         method="POST"
         action={actions.contactMe}
       >
-        <label class="form-control w-full">
-          <div class="label">
-            <span class="label-text">What should I call you?</span>
-          </div>
+        <fieldset class="fieldset">
+          <label
+            class="label font-bold flex justify-between"
+            for="contact-me-name"
+          >
+            What should I call you?
+          </label>
           <input
             transition:persist
+            id="contact-me-name"
             type="text"
             name="name"
             class="input input-bordered w-full"
             placeholder="John"
             aria-describedby="name-error"
           />
-          <div class="label">
+          <label class="label" for="contact-me-name">
             {
               inputErrors.name && (
-                <span id="name-error" class="label-text-alt text-error">
+                <span id="name-error" class="text-error">
                   {inputErrors.name.join(",")}
                 </span>
               )
             }
-          </div>
-        </label>
-        <label class="form-control w-full">
-          <div class="label">
-            <span class="label-text">Give us you email?</span>
-            <span class="label-text text-xs">Your email is safe with me 😈</span
-            >
-          </div>
+          </label>
+        </fieldset>
+        <fieldset class="fieldset">
+          <label class="label flex justify-between" for="contact-me-email">
+            <span class="font-bold">Give us you email?</span>
+            <span class="text-xs">Your email is safe with me 😈</span>
+          </label>
           <input
             transition:persist
+            id="contact-me-email"
             type="email"
             name="email"
             class="input input-bordered w-full"
             placeholder="john@doe.com"
             aria-describedby="email-error"
           />
-          <div class="label">
+          <label class="label" for="contact-me-email">
             {
               inputErrors.email && (
-                <span id="email-error" class="label-text-alt text-error">
+                <span id="email-error" class="text-error">
                   {inputErrors.email.join(",")}
                 </span>
               )
             }
-          </div>
-        </label>
+          </label>
+        </fieldset>
 
-        <label class="form-control col-span-full">
-          <div class="label">
-            <span class="label-text">Let it out</span>
-          </div>
+        <fieldset class="fieldset col-span-full">
+          <label class="label font-bold" for="contact-me-message"
+            >Let it out
+          </label>
           <textarea
             transition:persist
+            id="contact-me-message"
             name="message"
-            class="textarea textarea-bordered h-24"
+            class="textarea textarea-bordered h-24 w-full"
             placeholder="Message"
             maxlength="300"
             aria-describedby="message-error"></textarea>
-          <div class="label">
+          <label class="label flex justify-between" for="contact-me-message">
             {
               inputErrors.message && (
-                <span id="message-error" class="label-text-alt text-error">
+                <span id="message-error" class="text-error">
                   {inputErrors.message.join(",")}
                 </span>
               )
             }
             <span
               id="message-textarea-counter"
-              class="label-text-alt text-xs text-neutral-content"
+              class="text-xs text-neutral-content ml-auto"
             >
               0/300 characters
             </span>
-          </div>
-        </label>
+          </label>
+        </fieldset>
         <div class="flex justify-end col-span-full">
           <button
             data-sitekey={siteKey}

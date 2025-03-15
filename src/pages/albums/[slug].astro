@@ -68,7 +68,7 @@ const imagesChunks = chunk(images, chunkSize);
           imagesChunks.flatMap((images) => {
             return (
               <div class="grid gap-4">
-                {images.map((image) => (
+                {images.map((image, i) => (
                   <a
                     href={image.src}
                     data-pswp-src={image.src}
@@ -84,7 +84,7 @@ const imagesChunks = chunk(images, chunkSize);
                       alt=""
                       width={640}
                       quality={70}
-                      loading="eager"
+                      loading={i <= 1 ? "eager" : "lazy"}
                     />
                   </a>
                 ))}

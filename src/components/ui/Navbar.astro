@@ -34,7 +34,7 @@ const navItems = [
         <a href="/" class="truncate">{navBarTitle}</a>
       </div>
       <div class="hidden flex-none lg:block">
-        <ul class="menu menu-lg menu-horizontal">
+        <ul class="menu menu-lg menu-horizontal w-full">
           <!-- Navbar menu content here -->
           {
             [...navItems].reverse().map((item) => (
@@ -70,12 +70,12 @@ const navItems = [
         <span class="flex-1 text-lg font-medium truncate mx-2 px-2">{navBarTitle}</span>
       </div>
 
-      <ul class="menu menu-lg p-2">
+      <ul class="menu menu-lg w-full p-2">
         <!-- Sidebar content here -->
         {
           navItems.map((item) => (
             <li>
-              <a href={item.path}>
+              <a href={item.path} aria-label={`${item.label} Page`}>
                 <span>{item.emoji}</span>
                 {item.label}
               </a>

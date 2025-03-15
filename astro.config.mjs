@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig, envField } from "astro/config";
 
-import tailwind from "@astrojs/tailwind";
+import tailwind from "@tailwindcss/vite";
 
 import mdx from "@astrojs/mdx";
 
@@ -12,8 +12,12 @@ import node from "@astrojs/node";
 // https://astro.build/config
 export default defineConfig({
   site: "https://lakzian.com",
-  integrations: [tailwind(), mdx(), sitemap()],
+  integrations: [mdx(), sitemap()],
   output: "server",
+
+  vite: {
+    plugins: [tailwind()],
+  },
 
   experimental: {
     svg: {

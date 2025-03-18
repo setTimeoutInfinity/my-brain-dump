@@ -7,14 +7,25 @@ import { personSchema } from "@constants/seo";
 
 interface Props {
   headline: string;
-  imageURL: ImageMetadata;
+  imageURL: ImageMetadata | string;
   imageCaption: string;
   description: string;
   datePublished: Date;
 }
 const { headline, imageURL, description, datePublished, imageCaption } =
   Astro.props;
-const thumbnailURL = await getImage({ src: imageURL, width: 400, quality: 40 });
+const thumbnail = await getImage({
+  src: imageURL,
+  width: 400,
+  quality: 40,
+  inferSize: true,
+});
+const image = await getImage({
+  src: imageURL,
+  width: 400,
+  quality: 80,
+  inferSize: true,
+});
 
 const pageUrl = new URL(Astro.url.pathname, Astro.site);
 
@@ -22,7 +33,7 @@ const schema = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   headline: headline,
-  thumbnailUrl: thumbnailURL.src,
+  thumbnailUrl: thumbnail.src,
   description: description,
   datePublished: dayjs(datePublished).format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
   name: headline,
@@ -30,10 +41,10 @@ const schema = JSON.stringify({
   inLanguage: "en-AU",
   image: {
     "@type": "ImageObject",
-    url: imageURL.src,
-    contentUrl: imageURL.src,
-    width: imageURL.width,
-    height: imageURL.height,
+    url: image.src,
+    contentUrl: image.src,
+    width: image.options.width,
+    height: image.options.height,
     caption: imageCaption,
   },
   author: { ...personSchema },

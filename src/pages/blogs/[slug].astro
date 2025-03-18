@@ -1,53 +1,61 @@
 ---
-import type { CollectionEntry } from "astro:content";
-import { getCollection } from "astro:content";
+import { getAllBlogPosts, type BlogPost } from "@lib/blogs";
 import { getImage, Image } from "astro:assets";
 import { SEO } from "astro-seo";
 import dayjs from "dayjs";
 import isNil from "lodash/isNil";
 import isEmpty from "lodash/isEmpty";
+import { marked } from "marked";
 import Layout from "@layouts/Layout.astro";
 import BlogPostStructuredData from "@components/seo/BlogPostStructuredData.astro";
 
+import "@styles/pages/blog.css";
+
 interface Props {
-  blog: CollectionEntry<"blogs">;
+  blog: BlogPost;
 }
 
 export const prerender = true;
 export async function getStaticPaths() {
-  const blogPosts = await getCollection("blogs");
+  const blogPosts = await getAllBlogPosts();
   return blogPosts.map((blog: any) => ({
     params: { slug: blog.slug },
     props: { blog },
   }));
 }
 const { blog } = Astro.props;
-const { Content } = await blog.render();
-const hasCaption = !isNil(blog.data.caption) && !isEmpty(blog.data.caption);
-const imageThumb = await getImage({
-  src: blog.data.image,
+const content = await marked(blog.content);
+const hasCaption = !isNil(blog.caption) && !isEmpty(blog.caption);
+const thumbnail = await getImage({
+  src: blog.image,
   width: 400,
+  inferSize: true,
   quality: 40,
+});
+const image = await getImage({
+  src: blog.image,
+  inferSize: true,
+  quality: 70,
 });
 ---
 
-<Layout title={blog.data.title}>
+<Layout title={blog.title}>
   <BlogPostStructuredData
     slot="structured-data"
-    headline={blog.data.title}
-    imageURL={blog.data.image}
-    imageCaption={blog.data.caption || `Image cover for ${blog.data.title}`}
-    description={blog.data.description}
-    datePublished={blog.data.date}
+    headline={blog.title}
+    imageURL={blog.image}
+    imageCaption={blog.caption || `Image cover for ${blog.title}`}
+    description={blog.description}
+    datePublished={blog.date}
   />
   <SEO
     slot="seo"
-    description={blog.data.description}
+    description={blog.description}
     openGraph={{
       basic: {
-        title: blog.data.title,
+        title: blog.title,
         type: "article",
-        image: imageThumb.src,
+        image: thumbnail.src,
         url: `https://lakzian.com/blogs/${blog.slug}`,
       },
     }}
@@ -56,18 +64,18 @@ const imageThumb = await getImage({
     <div class="mt-5 md:mt-16 mb-10 md:mb-10">
       <div id="blog-cover-image-js" class="flex justify-center m-auto">
         <a
-          href={blog.data.image.src}
-          data-pswp-src={blog.data.image.src}
-          data-pswp-width={blog.data.image.width}
-          data-pswp-height={blog.data.image.height}
+          href={image.src}
+          data-pswp-src={image.src}
+          data-pswp-width={image.options.width}
+          data-pswp-height={image.options.height}
           data-cropped="true"
           class="cover-grid relative bg-base-300 rounded-2xl border-neutral border md:max-w-4xl shadow-2xl overflow-hidden"
         >
-          <Image
-            src={blog.data.image}
-            alt={blog.data.title}
-            width={640}
-            quality={70}
+          <img
+            src={image.src}
+            alt={blog.title}
+            width={image.options.width}
+            height={image.options.height}
             loading="eager"
             class="object-cover object-center !m-0 aspect-video block rounded-2xl shadow-2xl"
           />
@@ -75,9 +83,9 @@ const imageThumb = await getImage({
             hasCaption && (
               <span
                 class="badge select-none shadow-xl truncate  max-w-lg block m-2"
-                title={blog.data.caption}
+                title={blog.caption}
               >
-                {blog.data.caption}
+                {blog.caption}
               </span>
             )
           }
@@ -87,12 +95,12 @@ const imageThumb = await getImage({
 
     <article class="prose mx-auto">
       <h1 class="md:!text-5xl md:!leading-[1.2] font-medium mb-0">
-        {blog.data.title}
+        {blog.title}
       </h1>
       <span class="divider m-0"></span>
-      <time>{dayjs(blog.data.date).format("MMMM DD, YYYY")}</time>
-      <p class="lead">{blog.data.description}</p>
-      <Content />
+      <time>{dayjs(blog.date).format("MMMM DD, YYYY")}</time>
+      <p class="lead">{blog.description}</p>
+      <div set:html={content} />
     </article>
     <span class="h-52"></span>
   </div>
@@ -141,13 +149,5 @@ const imageThumb = await getImage({
   .cover-grid span.badge {
     grid-area: 1 / 2;
     align-self: end;
-  }
-</style>
-
-<style>
-  @reference "@styles/global.css";
-
-  .blog-cover-image-caption {
-    @apply absolute w-96 rounded-xl border border-neutral select-none bg-base-100 shadow-xl bottom-8 left-1/2 transform -translate-x-1/2 p-2 font-medium text-justify;
   }
 </style>

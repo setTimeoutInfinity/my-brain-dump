@@ -1,0 +1,5 @@
+@reference "@styles/global.css";
+
+.blog-cover-image-caption {
+  @apply absolute w-96 rounded-xl border border-neutral select-none bg-base-100 shadow-xl bottom-8 left-1/2 transform -translate-x-1/2 p-2 font-medium text-justify;
+}

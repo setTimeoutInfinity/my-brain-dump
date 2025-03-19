@@ -1,6 +1,6 @@
 ---
 import { getAllBlogPosts, type BlogPost } from "@lib/blogs";
-import { getImage, Image } from "astro:assets";
+import { getImage, Image, inferRemoteSize } from "astro:assets";
 import { SEO } from "astro-seo";
 import dayjs from "dayjs";
 import isNil from "lodash/isNil";
@@ -24,16 +24,12 @@ export async function getStaticPaths() {
   }));
 }
 const { blog } = Astro.props;
+const url = new URL(Astro.request.url);
 const content = await marked(blog.content);
 const hasCaption = !isNil(blog.caption) && !isEmpty(blog.caption);
-const thumbnail = await getImage({
-  src: blog.image,
-  width: 400,
-  inferSize: true,
-  quality: 40,
-});
+const imageUrl = blog.image;
 const image = await getImage({
-  src: blog.image,
+  src: imageUrl,
   inferSize: true,
   quality: 70,
 });
@@ -43,7 +39,7 @@ const image = await getImage({
   <BlogPostStructuredData
     slot="structured-data"
     headline={blog.title}
-    imageURL={blog.image}
+    imageURL={imageUrl}
     imageCaption={blog.caption || `Image cover for ${blog.title}`}
     description={blog.description}
     datePublished={blog.date}
@@ -55,7 +51,7 @@ const image = await getImage({
       basic: {
         title: blog.title,
         type: "article",
-        image: thumbnail.src,
+        image: imageUrl,
         url: `https://lakzian.com/blogs/${blog.slug}`,
       },
     }}
@@ -71,13 +67,12 @@ const image = await getImage({
           data-cropped="true"
           class="cover-grid relative bg-base-300 rounded-2xl border-neutral border md:max-w-4xl shadow-2xl overflow-hidden"
         >
-          <img
-            src={image.src}
+          <Image
+            src={imageUrl}
             alt={blog.title}
-            width={image.options.width}
-            height={image.options.height}
+            inferSize
             loading="eager"
-            class="object-cover object-center !m-0 aspect-video block rounded-2xl shadow-2xl"
+            class="skeleton object-cover object-center !m-0 aspect-video block rounded-2xl shadow-2xl"
           />
           {
             hasCaption && (

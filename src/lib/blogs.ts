@@ -1,29 +1,22 @@
 import { z } from "astro:content";
 import matter from "gray-matter";
 import dayjs from "dayjs";
-import {
-  listStorageContents,
-  getObjectFromStorage,
-  getObjectSignedURLFromStorage,
-} from "@utils/storage";
+import { listStorageContents, getObjectFromStorage } from "@utils/storage";
 
 // TODO: would be good to implement this as an Astro Content Loader
 
 const blogSchema = z.object({
   title: z.string(),
   description: z.string(),
-  image: z.string().transform(async (image) => {
-    // FIXME: create a resource route for getting image from storage. Do not like this
-    try {
-      const url = await getObjectSignedURLFromStorage(
-        `blogs/${image.replace("./", "")}`
-      );
-      return url;
-    } catch (error) {
-      console.log("error: getting image signed url from storage", error);
-      return "";
-    }
-  }),
+  image: z
+    .string()
+    .transform(
+      (image) =>
+        `https://mw-storage.fly.storage.tigris.dev/blogs/${image.replace(
+          "./",
+          ""
+        )}`
+    ),
   caption: z.string().nullish(),
   date: z.coerce.date(),
 });
@@ -47,7 +40,7 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
       const slug = key.split("/").pop()?.replace(".md", "") || "";
 
       // validate frontmatter against schema
-      const validatedData = await blogSchema.parseAsync(data);
+      const validatedData = await blogSchema.parse(data);
 
       return {
         ...validatedData,

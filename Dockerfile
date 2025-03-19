@@ -15,7 +15,7 @@ ENV NODE_ENV="production"
 COPY package.json pnpm-lock.yaml ./
 
 # pin pnpm version
-ARG PNPM_VERSION=9.14.4
+ARG PNPM_VERSION=10.6.4
 
 FROM base AS prod-deps
 RUN npm install -g pnpm@$PNPM_VERSION && \
@@ -32,8 +32,18 @@ FROM build-deps AS build
 # Copy application code
 COPY . .
 
-# Build application
-RUN pnpm run build
+# Mount secrets and set environment variables then build app
+RUN --mount=type=secret,id=AWS_REGION \
+    --mount=type=secret,id=BUCKET_NAME \
+    --mount=type=secret,id=AWS_ACCESS_KEY_ID \
+    --mount=type=secret,id=AWS_ENDPOINT_URL_S3 \
+    --mount=type=secret,id=AWS_SECRET_ACCESS_KEY \
+    export AWS_REGION=$(cat /run/secrets/AWS_REGION) \
+    export BUCKET_NAME=$(cat /run/secrets/BUCKET_NAME) \
+    export AWS_ACCESS_KEY_ID=$(cat /run/secrets/AWS_ACCESS_KEY_ID) \
+    export AWS_ENDPOINT_URL_S3=$(cat /run/secrets/AWS_ENDPOINT_URL_S3) \
+    export AWS_SECRET_ACCESS_KEY=$(cat /run/secrets/AWS_SECRET_ACCESS_KEY) && \
+    pnpm run build
 
 FROM base AS runtime
 

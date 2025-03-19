@@ -54,6 +54,7 @@ const titleSuffix = "Danyal Lakzian";
       crossorigin="anonymous"
     />
     <slot name="head" />
+    <meta property="og:logo" content="/favicon-96x96.png" />
     <slot name="seo" />
     <slot name="structured-data" />
     <title>{title ? `${title} - ${titleSuffix}` : titleSuffix}</title>

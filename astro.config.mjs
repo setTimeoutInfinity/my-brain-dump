@@ -20,9 +20,6 @@ export default defineConfig({
   },
 
   experimental: {
-    svg: {
-      mode: "inline",
-    },
   },
 
   adapter: node({

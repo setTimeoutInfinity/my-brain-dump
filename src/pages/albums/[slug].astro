@@ -1,18 +1,17 @@
 ---
-import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import { SEO } from "astro-seo";
 import chunk from "lodash/chunk";
 import Layout from "@layouts/Layout.astro";
-import { getAlbumImages } from "@utils/ablums";
+import { getAllAlbums, getAlbumImages } from "@lib/albums";
 import Hero from "@components/ui/Hero.astro";
 import ImageGalleryStructuredData from "@components/seo/ImageGalleryStructuredData.astro";
 
 export const prerender = true;
 export async function getStaticPaths() {
-  const albums = await getCollection("albums");
+  const albums = await getAllAlbums();
 
-  const paths = Object.values(albums).map((album) => {
+  const paths = albums.map((album) => {
     return {
       params: { slug: album.id },
       props: { album },
@@ -29,33 +28,33 @@ const chunkSize = Math.ceil(images.length / 4);
 const imagesChunks = chunk(images, chunkSize);
 ---
 
-<Layout title={album.data.title}>
+<Layout title={album.title}>
   <ImageGalleryStructuredData
     slot="structured-data"
-    headline={album.data.title}
-    description={album.data.description}
-    datePublished={album.data.date}
+    headline={album.title}
+    description={album.description}
+    datePublished={album.date}
     imageURLs={imageURLs}
-    location={album.data.location}
+    location={album.location}
     keywords={[]}
   />
   <SEO
     slot="seo"
-    description={album.data.description}
+    description={album.description}
     openGraph={{
       basic: {
-        title: album.data.title,
+        title: album.title,
         type: "website",
-        image: album.data.cover.src,
+        image: album.cover,
         url: `https://lakzian.com/albums/${album.id}`,
       },
     }}
   />
 
   <Hero
-    image={album.data.cover}
-    heading={album.data.title}
-    subHeading={album.data.description}
+    image={album.cover}
+    heading={album.title}
+    subHeading={album.description}
   />
 
   <section>
@@ -79,10 +78,11 @@ const imagesChunks = chunk(images, chunkSize);
                     class="relative bg-base-300 rounded-2xl border-neutral border overflow-hidden"
                   >
                     <Image
-                      src={image}
+                      src={image.src}
                       class="rounded object-cover object-center !m-0 h-full"
                       alt=""
-                      width={640}
+                      width={image.width}
+                      height={image.height}
                       quality={70}
                       loading={i <= 1 ? "eager" : "lazy"}
                     />
